@@ -1,6 +1,6 @@
 //Subprograma
 
-const clearList = () => {
+const clearListView = () => {
   const children = [...tasksList.children];
   children.forEach((child) => {
     tasksList.removeChild(child);
@@ -12,13 +12,13 @@ const handleDeleteClick = (targetTask) => {
     return task != targetTask;
   });
   tasks = filtered;
-  updateList();
+  updateListView();
 }
 
 
-const updateList = () => {
-  console.log('updateList', tasks);
-  clearList();
+const updateListView = () => {
+  console.log('updateListView', tasks);
+  clearListView();
   
   tasks.forEach((task) => {   
     const listItem = document.createElement('li');
@@ -50,7 +50,7 @@ const handleSubmit = (event) => {
   }
   
   tasks.push(newTask);
-  updateList();
+  updateListView();
   
 }
 
