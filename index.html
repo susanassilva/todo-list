@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO List</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <div>
+    <header>
+      <h1>TODO List</h1>
+    </header>
+  </div>
+
+  <div>
+    <h2>Create new task</h2>
+    <form id="new-task-form">
+      
+      <label>Tarefa de hoje: </label>
+      <input name="title"/>
+      <div class="text-descricao">
+        <label>Descrição da tarefa</label>
+        <textarea name="description"></textarea>
+      </div>
+      <button type="submit">Create</button>
+      <button type="reset">Reset</button>
+      
+      
+    </form>
+  </div>
+
+  <div>
+    <section>
+      <h2>Tasks</h2>
+      <ul id="task-list"></ul>
+    </section>
+  </div>
+  
+  <script src='./js/script.js'></script>
+</body>
+</html>
