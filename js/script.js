@@ -55,20 +55,28 @@ const loadFromLocalStorage = () => {
 
 loadFromLocalStorage();
 
+const saveToLocalStorage = () => {
+  const parsedData = JSON.stringify(tasks);
+  localStorage.setItem('tasks', parsedData);
+
+}
+
 const handleDeleteClick = (targetTask) => {
   const filtered = tasks.filter((task) => {
     return task != targetTask;
   });
 
   tasks = filtered;
+
   saveToLocalStorage();
   updateListView();
 };
 
-const saveToLocalStorage = () => {
-  const parsedData = JSON.stringify(tasks);
-  localStorage.setItem('tasks', parsedData);
 
+const handleCheckboxChange = (targetTask) => {
+  targetTask.isDone = !targetTask.isDone;
+  saveToLocalStorage();
+  updateListView();
 }
 
 const handleSubmit = (event) => {
@@ -86,16 +94,11 @@ const handleSubmit = (event) => {
   
   tasks.push(newTask);
   saveToLocalStorage();
+  
   updateListView();
   
 };
 
 newTaskForm.addEventListener('submit', handleSubmit);
-
-const handleCheckboxChange = (targetTask) => {
-  targetTask.isDone = !targetTask.isDone;
-  saveToLocalStorage();
-  updateListView();
-}
 
 
