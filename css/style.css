@@ -4,22 +4,29 @@ body {
 
 div {
   margin: 20px;
+  
+}
+
+.corpo {
+  border: 2px solid pink;
 }
 
 input {
-  margin: 20px;
+  margin: 30px 20px;
 }
+
 
 button {
   background-color: black;
   border-radius: 8px;
   border: 1px;
   color: white;
-  padding: 10px;
-  margin-left: 20px;
+  padding: 10px 30px;
   margin-top: 20px;
 
 }
+
+
 
 textarea {
   padding: 40px;

@@ -1,20 +1,17 @@
-//Subprograma
+//Programa Principal
+const newTaskForm = document.querySelector('#new-task-form');
+
+const tasksList = document.querySelector('#task-list');
+
+let tasks = [];
 
 const clearListView = () => {
   const children = [...tasksList.children];
+  
   children.forEach((child) => {
     tasksList.removeChild(child);
   });
-}
-
-const handleDeleteClick = (targetTask) => {
-  const filtered = tasks.filter((task) => {
-    return task != targetTask;
-  });
-  tasks = filtered;
-  updateListView();
-}
-
+};
 
 const updateListView = () => {
   console.log('updateListView', tasks);
@@ -25,16 +22,54 @@ const updateListView = () => {
     listItem.textContent = task.title;
     
     const buttonDelete = document.createElement('button');
-    buttonDelete.innerHTML = 'delete';
-    listItem.appendChild(buttonDelete);
+    buttonDelete.innerHTML = 'Delete';
     buttonDelete.onclick = () => {
       handleDeleteClick(task);
+    };
+    listItem.appendChild(buttonDelete);
+
+    const checkIsDone = document.createElement('input');
+    checkIsDone.setAttribute('type', 'checkbox');
+    checkIsDone.checked = task.isDone;
+    checkIsDone.onchange = () => {
+      handleCheckboxChange(task);
     }
+    listItem.appendChild(checkIsDone);
 
     tasksList.appendChild(listItem);
   });
 }
 
+const loadFromLocalStorage = () => {
+  const savedData = localStorage.getItem('tasks');
+  
+  if(savedData === null) {
+    return;
+  }
+
+  const parsedData = JSON.parse(savedData);
+  tasks = parsedData;
+
+  updateListView();
+}
+
+loadFromLocalStorage();
+
+const handleDeleteClick = (targetTask) => {
+  const filtered = tasks.filter((task) => {
+    return task != targetTask;
+  });
+
+  tasks = filtered;
+  saveToLocalStorage();
+  updateListView();
+};
+
+const saveToLocalStorage = () => {
+  const parsedData = JSON.stringify(tasks);
+  localStorage.setItem('tasks', parsedData);
+
+}
 
 const handleSubmit = (event) => {
   event.preventDefault();
@@ -47,25 +82,20 @@ const handleSubmit = (event) => {
     title: formEntries.title,
     description: formEntries.description,
     isDone: false
-  }
+  };
   
   tasks.push(newTask);
+  saveToLocalStorage();
   updateListView();
   
-}
-
-
-
-
-
-//Programa Principal
-
-const newTaskForm = document.querySelector('#new-task-form');
-
-const tasksList = document.querySelector('#task-list');
-
-let tasks = [];
+};
 
 newTaskForm.addEventListener('submit', handleSubmit);
+
+const handleCheckboxChange = (targetTask) => {
+  targetTask.isDone = !targetTask.isDone;
+  saveToLocalStorage();
+  updateListView();
+}
 
 
