@@ -1,43 +1,51 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TODO List</title>
-  <link rel="stylesheet" href="./css/style.css">
-</head>
-<body>
-<div class="corpo">
-  <div>
-    <header>
-      <h1>TODO List</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODO List</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <a>Menu</a>
+      <h1>TO DO</h1>
+      <a href="https://github.com/susanassilva">Github</a>
     </header>
-  </div>
 
-  <div>
-    <h2>Create new task</h2>
-    <form id="new-task-form">
-      
-      <label>Tarefa de hoje: </label>
-      <input name="title"/>
-      <div class="text-descricao">
-        <label>Descrição da tarefa</label>
-        <textarea name="description"></textarea>
+    <main class="main">
+      <div class="container">
+
+        <div id="new-task-popup" class="new-task-popup">
+          <div class="new-task-popup-container">
+            <div class="new-task-popup-header">
+              <button id="button-new-task-popup-close" class="btn-close-new-task-popup"onclick="toggleNewTaskPopUp()">X</button>
+              <h2>Adicionar Tarefa</h2>
+            </div>
+            <form id="new-task-form" class="new-task-form">
+              <label>Tarefa de hoje: </label>
+              <input name="title" required/>
+              <div class="text-descricao">
+                <label for="description">Descrição:</label>
+                <textarea id="description" name="description"></textarea>
+              </div>
+              <button class="createBtn" type="submit">Create</button>
+            </form>
+          </div>
+
+        </div>
+        <div>
+        <div class="tasks-header">
+          <button id="button-new-task"  class="button-new-task" onclick="toggleNewTaskPopUp()">Nova Tarefa</button>
+          <h2>Tarefas</h2>
+        </div>
+        <ul id="task-list" class="task-list"></ul>
       </div>
-      <button class='createBtn' type="submit">Create</button>
-      <button class='resetBtn' type="reset">Reset</button>     
-      
-    </form>
-  </div>
 
-  <div>
-    <section>
-      <h2>Tasks</h2>
-      <ul id="task-list"></ul>
-    </section>
-  </div>
-</div>
-  <script src='./js/script.js'></script>
-</body>
+      </div>
+
+    </main>
+    <script src="./js/script.js"></script>
+  </body>
 </html>

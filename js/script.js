@@ -1,13 +1,14 @@
 //Programa Principal
 const newTaskForm = document.querySelector('#new-task-form');
-
+const newTaskPopup = document.getElementById('new-task-popup');
 const tasksList = document.querySelector('#task-list');
 
 let tasks = [];
+let showNewTaskPopUp = false;
 
 const clearListView = () => {
   const children = [...tasksList.children];
-  
+
   children.forEach((child) => {
     tasksList.removeChild(child);
   });
@@ -16,17 +17,15 @@ const clearListView = () => {
 const updateListView = () => {
   console.log('updateListView', tasks);
   clearListView();
-  
-  tasks.forEach((task) => {   
+
+  tasks.forEach((task) => {
     const listItem = document.createElement('li');
-    listItem.textContent = task.title;
-    
-    const buttonDelete = document.createElement('button');
-    buttonDelete.innerHTML = 'Delete';
-    buttonDelete.onclick = () => {
-      handleDeleteClick(task);
-    };
-    listItem.appendChild(buttonDelete);
+    listItem.classList.add('task-list-item');
+
+
+    const header = document.createElement('div');
+    header.classList.add('task-list-item-header');
+    listItem.appendChild(header);
 
     const checkIsDone = document.createElement('input');
     checkIsDone.setAttribute('type', 'checkbox');
@@ -34,7 +33,21 @@ const updateListView = () => {
     checkIsDone.onchange = () => {
       handleCheckboxChange(task);
     }
-    listItem.appendChild(checkIsDone);
+    header.appendChild(checkIsDone);
+
+    const title = document.createElement('p');
+    title.textContent = task.title;
+    header.appendChild(title);
+
+    const buttonDelete = document.createElement('button');
+    buttonDelete.classList.add('button-delete');
+    buttonDelete.innerHTML = 'Excluir';
+    buttonDelete.onclick = () => {
+      handleDeleteClick(task);
+    };
+    listItem.appendChild(buttonDelete);
+
+
 
     tasksList.appendChild(listItem);
   });
@@ -42,7 +55,7 @@ const updateListView = () => {
 
 const loadFromLocalStorage = () => {
   const savedData = localStorage.getItem('tasks');
-  
+
   if(savedData === null) {
     return;
   }
@@ -79,26 +92,54 @@ const handleCheckboxChange = (targetTask) => {
   updateListView();
 }
 
+const toggleNewTaskPopUp = () => {
+  showNewTaskPopUp = !showNewTaskPopUp;
+  if (showNewTaskPopUp === true) {
+    newTaskPopup.style.display = 'block';
+  } else {
+    newTaskPopup.style.display = 'none';
+  }
+
+  console.log('teste', showNewTaskPopUp);
+}
+
 const handleSubmit = (event) => {
   event.preventDefault();
-  
+
   const formData = new FormData(newTaskForm);
   const formEntries = Object.fromEntries(formData);
-  
+
   const newTask = {
     id: tasks.length,
     title: formEntries.title,
     description: formEntries.description,
     isDone: false
   };
-  
-  tasks.push(newTask);
+
+
+  tasks.unshift(newTask);
   saveToLocalStorage();
-  
+
   updateListView();
-  
+
+  if (event.keyCode === 13 && showNewTaskPopUp){
+    toggleNewTaskPopUp()
+  }
+
+  toggleNewTaskPopUp();
+  newTaskForm.reset();
 };
 
 newTaskForm.addEventListener('submit', handleSubmit);
 
 
+
+
+const handleKeyDown = (event) => {
+  //ESC
+  if (event.keyCode === 27 && showNewTaskPopUp){
+    toggleNewTaskPopUp();
+  };
+}
+
+document.addEventListener('keydown', handleKeyDown);
