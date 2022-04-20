@@ -2,9 +2,11 @@
 const newTaskForm = document.querySelector('#new-task-form');
 const newTaskPopup = document.getElementById('new-task-popup');
 const tasksList = document.querySelector('#task-list');
+const sideMenu = document.querySelector('#side-menu');
 
 let tasks = [];
 let showNewTaskPopUp = false;
+let showSideMenu = false;
 
 const clearListView = () => {
   const children = [...tasksList.children];
@@ -15,7 +17,6 @@ const clearListView = () => {
 };
 
 const updateListView = () => {
-  console.log('updateListView', tasks);
   clearListView();
 
   tasks.forEach((task) => {
@@ -99,8 +100,6 @@ const toggleNewTaskPopUp = () => {
   } else {
     newTaskPopup.style.display = 'none';
   }
-
-  console.log('teste', showNewTaskPopUp);
 }
 
 const handleSubmit = (event) => {
@@ -133,8 +132,6 @@ const handleSubmit = (event) => {
 newTaskForm.addEventListener('submit', handleSubmit);
 
 
-
-
 const handleKeyDown = (event) => {
   //ESC
   if (event.keyCode === 27 && showNewTaskPopUp){
@@ -143,3 +140,21 @@ const handleKeyDown = (event) => {
 }
 
 document.addEventListener('keydown', handleKeyDown);
+
+const toggleSideMenu = () => {
+  showSideMenu = !showSideMenu;
+
+  if (showSideMenu) {
+    sideMenu.classList.add('side-menu-open');
+  } else {
+    sideMenu.classList.remove('side-menu-open');
+  };
+};
+
+const handleResize = (event) => {
+  if (window.innerWidth >= 922 && showSideMenu) {
+    toggleSideMenu();
+  }
+}
+
+window.addEventListener('resize', handleResize);

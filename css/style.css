@@ -74,6 +74,12 @@ input[type="checkbox"] {
 
 .button-new-task{
   order: 2;
+  transition: background-color 800ms;
+}
+
+.button-new-task:hover {
+  background-color: #CB2588;
+  color: #ffffff;
 }
 
 .new-task-popup {
@@ -165,14 +171,78 @@ input[type="checkbox"] {
   font-size: small;
 }
 
+.menu-header {
+  display: flex;
+  flex: 1;
+}
 
+.btn-menu-header {
+  background-color: #CB2588;
+  border: none;
+  border-radius: 0;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  display: none;
+}
 
+.menu-item {
+  padding: 0 12px;
+  cursor: pointer;
+}
 
+.header-title {
+  flex: 2;
+  text-align: center;
+}
 
+.header-github {
+  flex: 1;
+  text-align: right;
+}
 
+.side-menu {
+  background-color: #ffffff;
+  border-right: 2px solid #f3209433;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  position: absolute;
+  right: 65%;
+  transition: 400ms ease-in-out;
+  transform: translate(-100%);
+  top: 63px;
+}
+
+.side-menu-open {
+  transform: translate(0%);
+}
+
+.side-menu-item {
+  color: #000000;
+  cursor: pointer;
+  display: block;
+  margin: 10px 0;
+  padding: 10px 15px;
+}
+
+.side-menu-item:hover {
+  background-color: #f3209433;
+}
+
+@media (max-width: 922px) {
+  .btn-menu-header {
+    display: block;
+  }
+
+  .menu-item {
+    display: none;
+  }
+}
 
 @media (max-width: 576px) {
   .new-task-popup-container{
     width: auto;
   }
+
 }

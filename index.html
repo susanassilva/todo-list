@@ -9,9 +9,26 @@
   </head>
   <body>
     <header class="header">
-      <a>Menu</a>
-      <h1>TO DO</h1>
-      <a href="https://github.com/susanassilva">Github</a>
+
+      <div class="menu-header">
+        <button class="btn-menu-header" onclick="toggleSideMenu()">Menu</button>
+        <a class='menu-item' href="/">Home</a>
+        <p class='menu-item' onclick="toggleNewTaskPopUp()">Nova Tarefa</p>
+        <a class='menu-item' href="https://github.com/susanassilva" target="_blank">GitHub</a>
+        <a class='menu-item' href="https://linkedin.com/in/susanassilva" target="_blank">Linkedin</a>
+        <p class='menu-item'>Ajuda</p>
+      </div>
+
+      <div class="side-menu" id="side-menu">
+        <a class='side-menu-item' href="/">Home</a>
+        <p class='side-menu-item' onclick="toggleNewTaskPopUp()">Nova Tarefa</p>
+        <a class='side-menu-item' href="https://github.com/susanassilva" target="_blank">GitHub</a>
+        <a class='side-menu-item' href="https://linkedin.com/in/susanassilva" target="_blank">Linkedin</a>
+        <p class='side-menu-item'>Ajuda</p>
+      </div>
+
+      <h1 class="header-title">TO DO</h1>
+      <a href="https://github.com/susanassilva/todo-list" class="header-github" target="_blank">Github</a>
     </header>
 
     <main class="main">
